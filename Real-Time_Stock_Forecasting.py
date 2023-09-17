@@ -53,9 +53,9 @@ TC['Symbol - Name'] = TC['Symbol'] + ' - ' + TC['Name']
 # In[9]:
 
 
-chosen_ticker_sn = st.selectbox("Please select available ticker below!",TC['Symbol-Name'])
+chosen_ticker_sn = st.selectbox("Please select available ticker below!",TC['Symbol - Name'])
 # chosen_ticker_sn = 'ACN - Accenture'
-chosen_ticker_symbol = TC.loc[TC['Symbol-Name'] == chosen_ticker_sn, 'Symbol'].item()
+chosen_ticker_symbol = TC.loc[TC['Symbol - Name'] == chosen_ticker_sn, 'Symbol'].item()
 # chosen_ticker_symbol
 
 
