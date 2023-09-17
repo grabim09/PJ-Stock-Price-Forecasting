@@ -53,13 +53,14 @@ TC['Symbol-Name'] = TC['Symbol'] + ' - ' + TC['Name']
 # In[19]:
 
 
-chosen_ticker = st.selectbox("Please select available ticker below!",TC['Symbol-Name'])
+chosen_ticker_sn = st.selectbox("Please select available ticker below!",TC['Symbol-Name'])
+chosen_ticker_symbol = TC.loc[TC['Symbol-Name'] == chosen_ticker_sn, 'Symbol']
 
 
 # In[20]:
 
 
-stock_data = yf.download(tickers=chosen_ticker,period='7d',interval='5m')
+stock_data = yf.download(tickers = chosen_ticker_symbol,period='7d',interval='5m')
 stock_data
 
 
