@@ -4,8 +4,10 @@
 # In[1]:
 
 
+import yfinance as yf
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 import streamlit as st
 
 
@@ -44,7 +46,7 @@ tickers = dict(tuples)
 
 TC = pd.DataFrame(tickers).T
 TC.columns = ['Symbol', 'Name']
-TC['Symbol-Name'] = TC['Symbol'] + '-' + TC['Name']
+TC['Symbol-Name'] = TC['Symbol'] + ' - ' + TC['Name']
 # TC
 
 
@@ -57,14 +59,8 @@ chosen_ticker = st.selectbox("Please select available ticker below!",TC['Symbol-
 # In[20]:
 
 
-import yfinance as yf
-
-
-# In[21]:
-
-
-data = yf.download(tickers='GOOGL',period='7d',interval='5m')
-data
+stock_data = yf.download(tickers=chosen_ticker,period='7d',interval='5m')
+stock_data
 
 
 # In[8]:

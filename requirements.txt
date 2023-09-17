@@ -1,2 +1,3 @@
+matplotib.pyplot
 yfinance
 streamlit
