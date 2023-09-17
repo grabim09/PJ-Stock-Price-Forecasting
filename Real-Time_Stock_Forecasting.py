@@ -7,7 +7,7 @@
 import yfinance as yf
 import pandas as pd
 import numpy as np
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import streamlit as st
 
 
@@ -59,16 +59,16 @@ chosen_ticker_symbol = TC.loc[TC['Symbol - Name'] == chosen_ticker_sn, 'Symbol']
 # chosen_ticker_symbol
 
 
-# In[20]:
+# In[10]:
 
 
 stock_data = yf.download(tickers = chosen_ticker_symbol,period='7d',interval='5m')
-stock_data
+# stock_data
 
 
 # In[8]:
 
 
-data['Adj Close'].plot()
+stock_data['Adj Close'].plot()
 plt.show()
 
