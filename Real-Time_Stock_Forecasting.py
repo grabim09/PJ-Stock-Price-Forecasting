@@ -26,35 +26,37 @@ tickers_data = pd.read_html(
 print(tickers_data.head())
 
 
-# In[6]:
+# In[4]:
 
 
 tickers_symbol = tickers_data.Symbol.to_list()
 tickers_name = tickers_data.Security.to_list()
 
 
-# In[11]:
+# In[5]:
 
 
 tuples = [(idx,(sym, name)) for idx, (sym, name) in enumerate(zip(tickers_symbol, tickers_name))]
 tickers = dict(tuples)
-# tickers
+tickers
 
 
-# In[18]:
+# In[6]:
 
 
 TC = pd.DataFrame(tickers).T
 TC.columns = ['Symbol', 'Name']
 TC['Symbol-Name'] = TC['Symbol'] + ' - ' + TC['Name']
-# TC
+TC
 
 
-# In[19]:
+# In[9]:
 
 
 chosen_ticker_sn = st.selectbox("Please select available ticker below!",TC['Symbol-Name'])
-chosen_ticker_symbol = TC.loc[TC['Symbol-Name'] == chosen_ticker_sn, 'Symbol']
+# chosen_ticker_sn = 'ACN - Accenture'
+chosen_ticker_symbol = TC.loc[TC['Symbol-Name'] == chosen_ticker_sn, 'Symbol'].item()
+# chosen_ticker_symbol
 
 
 # In[20]:
