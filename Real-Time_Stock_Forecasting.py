@@ -1,17 +1,28 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[7]:
+# In[1]:
 
 
-import yfinance as yf
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
 
 
-# In[8]:
+# In[2]:
+
+
+st.title('Real-Time Stock Price Forecasting')
+
+
+# In[3]:
+
+
+import yfinance as yf
+
+
+# In[4]:
 
 
 # Read and print the stock tickers that make up S&P500
@@ -20,27 +31,27 @@ tickers = pd.read_html(
 print(tickers.head())
 
 
-# In[10]:
+# In[5]:
 
 
 tickers_list = tickers.Symbol.to_list()
 tickers_name = tickers.Security.to_list()
 
 
-# In[13]:
+# In[6]:
 
 
 chosen_ticker = st.selectbox("Please select available ticker below!",tickers_name)
 
 
-# In[5]:
+# In[7]:
 
 
 data = yf.download(tickers='GOOGL',period='7d',interval='5m')
 data
 
 
-# In[6]:
+# In[8]:
 
 
 data['Adj Close'].plot()
