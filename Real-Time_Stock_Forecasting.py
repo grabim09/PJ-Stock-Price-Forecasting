@@ -97,14 +97,15 @@ with col1:
     final_period_value = st.slider("Choose period length", 1, period_format.get(chosen_period_format)["Max Period"], 3)
     final_period = "Final period is {} {}".format(final_period_value, chosen_period_format)
     st.write(final_period)
+    fp = "{}{}".format(final_period_value, final_period_format)
 with col2:
     chosen_interval_format = st.selectbox("Select interval format",list(interval_format.keys()))
     final_interval_format = interval_format.get(chosen_interval_format)["Code"]
     final_interval_value = st.slider("Choose interval length", 1, interval_format.get(chosen_interval_format)["Max Interval"], 5)
     final_interval = "Final interval is {} {}".format(final_interval_value, chosen_interval_format)
     st.write(final_interval)
-# st.write("I'm ", age, 'years old')
-stock_data = yf.download(tickers = chosen_ticker_symbol, period = "17d", interval = "5m")
+    fi = "{}{}".format(final_interval_value, final_interval_format)
+stock_data = yf.download(tickers = chosen_ticker_symbol, period = fp, interval = fi)
 stock_data.drop(stock_data.loc[stock_data['Volume'] == 0].index, inplace = True)
 # stock_data
 row_amount = stock_data.shape[0]
