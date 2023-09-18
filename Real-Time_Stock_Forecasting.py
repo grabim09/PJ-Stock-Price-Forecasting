@@ -93,7 +93,7 @@ with col1:
     final_period = "Final period is {} {}".format(final_period_value, final_period_format)
     st.write(final_period)
 with col2:
-    
+    st.write(final_period)
 # st.write("I'm ", age, 'years old')
 stock_data = yf.download(tickers = chosen_ticker_symbol, period = "17d", interval = "5m")
 stock_data.drop(stock_data.loc[stock_data['Volume'] == 0].index, inplace = True)
