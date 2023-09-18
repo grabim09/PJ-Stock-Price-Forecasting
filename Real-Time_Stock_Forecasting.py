@@ -11,6 +11,12 @@ import numpy as np
 import streamlit as st
 
 
+# In[ ]:
+
+
+st.title("Real-Time Stock Price Forecasting")
+
+
 # In[47]:
 
 
@@ -90,7 +96,7 @@ with col1:
     final_period_format = period_format.get(chosen_period_format)["Code"]
     final_period_value = st.slider("Choose period length", 1, period_format.get(chosen_period_format)["Max Period"], 3)
 #     final_period = str(final_period_value) + final_period_format
-    final_period = "Final period is {} {}".format(final_period_value, final_period_format)
+    final_period = "Final period is {} {}".format(final_period_value, chosen_period_format)
     st.write(final_period)
 with col2:
     st.write(final_period)
