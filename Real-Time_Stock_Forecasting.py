@@ -71,4 +71,6 @@ stock_data
 
 stock_data['Adj Close'].plot()
 plt.show()
+fig = plt.figure(figsize=(8,8))
+st.pyplot(fig) # instead of plt.show()
 
