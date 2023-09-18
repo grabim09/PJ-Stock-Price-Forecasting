@@ -23,7 +23,7 @@ tickers = dict(tuples)
 # print(tickers)
 
 
-# In[79]:
+# In[81]:
 
 
 period_format = {
@@ -44,7 +44,7 @@ period_format = {
 # available_period_format
 # list(period_format.keys())[0]
 # period_format["day"]
-# period_format.get("day")["Code"]
+# period_format.get("day")["Max Period"]
 
 
 # In[66]:
@@ -59,7 +59,7 @@ chosen_ticker_symbol = available_tickers.loc[available_tickers['Symbol - Name'] 
 chosen_ticker_symbol = "GOOGL"
 chosen_period_format = st.selectbox("Select period format",list(period_format.keys()))
 final_period_format = period_format.get(chosen_period_format)["Code"]
-final_period_value = st.slider("Choose Period", 0, period_format.get(chosen_period_format)["Max period"], 3)
+final_period_value = st.slider("Choose Period", 0, period_format.get(chosen_period_format)["Max Period"], 3)
 final_period = str(final_period_value) + final_period_format
 st.write("Final period is {}".format(final_period))
 # st.write("I'm ", age, 'years old')
