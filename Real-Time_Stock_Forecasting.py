@@ -50,7 +50,7 @@ TC['Symbol - Name'] = TC['Symbol'] + ' - ' + TC['Name']
 # TC
 
 
-# In[9]:
+# In[7]:
 
 
 chosen_ticker_sn = st.selectbox("Please select available ticker below!",TC['Symbol - Name'])
@@ -59,14 +59,14 @@ chosen_ticker_symbol = TC.loc[TC['Symbol - Name'] == chosen_ticker_sn, 'Symbol']
 # chosen_ticker_symbol
 
 
-# In[10]:
+# In[8]:
 
 
 stock_data = yf.download(tickers = chosen_ticker_symbol,period='7d',interval='5m')
-# stock_data
+stock_data
 
 
-# In[8]:
+# In[9]:
 
 
 stock_data['Adj Close'].plot()
