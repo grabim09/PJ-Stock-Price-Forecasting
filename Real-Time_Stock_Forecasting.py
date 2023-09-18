@@ -54,7 +54,7 @@ TC['Symbol - Name'] = TC['Symbol'] + ' - ' + TC['Name']
 
 
 chosen_ticker_sn = st.selectbox("Please select available ticker below!",TC['Symbol - Name'])
-st.write('**You have chosen **' + chosen_ticker_sn + ' Tickers')
+st.write('You have chosen ' + chosen_ticker_sn + ' Tickers')
 # chosen_ticker_sn = 'ACN - Accenture'
 chosen_ticker_symbol = TC.loc[TC['Symbol - Name'] == chosen_ticker_sn, 'Symbol'].item()
 # chosen_ticker_symbol
@@ -74,6 +74,6 @@ st.dataframe(stock_data)
 
 stock_data['Adj Close'].plot()
 plt.show()
-fig = plt.figure(figsize=(8,8))
+fig = plt.figure(figsize=(8,4))
 st.pyplot(fig) # instead of plt.show()
 
