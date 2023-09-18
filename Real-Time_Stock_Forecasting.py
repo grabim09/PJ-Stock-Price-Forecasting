@@ -54,16 +54,19 @@ TC['Symbol - Name'] = TC['Symbol'] + ' - ' + TC['Name']
 
 
 chosen_ticker_sn = st.selectbox("Please select available ticker below!",TC['Symbol - Name'])
+st.write('You have chosen ' + chosen_ticker_sn + ' Tickers')
 # chosen_ticker_sn = 'ACN - Accenture'
 chosen_ticker_symbol = TC.loc[TC['Symbol - Name'] == chosen_ticker_sn, 'Symbol'].item()
 # chosen_ticker_symbol
 
 
-# In[8]:
+# In[10]:
 
 
 stock_data = yf.download(tickers = chosen_ticker_symbol,period='7d',interval='5m')
-stock_data
+st.dataframe(stock_data)
+# stock_data = yf.download(tickers = 'GOOGL',period='7d',interval='5m')
+# stock_data
 
 
 # In[9]:
