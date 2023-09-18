@@ -71,11 +71,11 @@ interval_format = {
     },
     "Week": {
         "Code": "wk",
-        "Max Period": 4
+        "Max Interval": 4
     },
     "Month": {
         "Code": "mo",
-        "Max Period": 12
+        "Max Interval": 12
     }
 }
 
@@ -95,11 +95,14 @@ with col1:
     chosen_period_format = st.selectbox("Select period format",list(period_format.keys()))
     final_period_format = period_format.get(chosen_period_format)["Code"]
     final_period_value = st.slider("Choose period length", 1, period_format.get(chosen_period_format)["Max Period"], 3)
-#     final_period = str(final_period_value) + final_period_format
     final_period = "Final period is {} {}".format(final_period_value, chosen_period_format)
     st.write(final_period)
 with col2:
-    st.write(final_period)
+    chosen_interval_format = st.selectbox("Select interval format",list(interval_format.keys()))
+    final_interval_format = interval_format.get(chosen_interval_format)["Code"]
+    final_interval_value = st.slider("Choose interval length", 1, interval_format.get(chosen_interval_format)["Max Interval"], 5)
+    final_interval = "Final interval is {} {}".format(final_interval_value, chosen_interval_format)
+    st.write(final_interval)
 # st.write("I'm ", age, 'years old')
 stock_data = yf.download(tickers = chosen_ticker_symbol, period = "17d", interval = "5m")
 stock_data.drop(stock_data.loc[stock_data['Volume'] == 0].index, inplace = True)
