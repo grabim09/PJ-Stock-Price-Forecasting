@@ -38,6 +38,7 @@ def choose_ticker():
     stock_data = stock_data.drop((stock_data == 0).any(axis=1))
     st.write('You have chosen ' + chosen_ticker_sn + ' Tickers')
     st.dataframe(stock_data, height = 200, use_container_width = True)
+    return stock_data
 
 
 # In[18]:
