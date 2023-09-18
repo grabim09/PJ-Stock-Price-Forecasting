@@ -64,7 +64,7 @@ chosen_ticker_symbol = TC.loc[TC['Symbol - Name'] == chosen_ticker_sn, 'Symbol']
 
 
 stock_data = yf.download(tickers = chosen_ticker_symbol,period='7d',interval='5m')
-st.dataframe(stock_data, height = 300, use_container_width = True)
+st.dataframe(stock_data, height = 200, use_container_width = True)
 # stock_data = yf.download(tickers = 'GOOGL',period='7d',interval='5m')
 # stock_data
 
