@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[15]:
+# In[46]:
 
 
 import yfinance as yf
@@ -11,7 +11,7 @@ import numpy as np
 import streamlit as st
 
 
-# In[24]:
+# In[47]:
 
 
 # Read and print the stock tickers that make up S&P500
@@ -23,29 +23,54 @@ tickers = dict(tuples)
 # print(tickers)
 
 
-# In[25]:
+# In[79]:
 
 
-tickers_list = pd.DataFrame(tickers).T
-tickers_list.columns = ['Symbol', 'Name']
-tickers_list['Symbol - Name'] = tickers_list['Symbol'] + ' - ' + tickers_list['Name']
+period_format = {
+    "day": {
+        "Code": "d",
+        "Max Period": 30
+    },
+    "month": {
+        "Code": "m",
+        "Max Period": 12
+    },
+    "year": {
+        "Code": "y",
+        "Max Period": 10
+    }
+}
+# available_period_format = pd.DataFrame(period_format).T
+# available_period_format
+# list(period_format.keys())[0]
+# period_format["day"]
+# period_format.get("day")["Code"]
+
+
+# In[66]:
+
+
+available_tickers = pd.DataFrame(tickers).T
+available_tickers.columns = ['Symbol', 'Name']
+available_tickers['Symbol - Name'] = available_tickers['Symbol'] + ' - ' + available_tickers['Name']
 # print(tickers_list)
-
-
-# In[45]:
-
-
-chosen_ticker_sn = st.selectbox("Please select available ticker below!",tickers_list['Symbol - Name'])
-chosen_ticker_symbol = tickers_list.loc[tickers_list['Symbol - Name'] == chosen_ticker_sn, 'Symbol'].item()
-# chosen_ticker_symbol = "GOOGL"
-stock_data = yf.download(tickers = chosen_ticker_symbol, period = "60d", interval = "5m")
+chosen_ticker_sn = st.selectbox("Please select available ticker below!",available_tickers['Symbol - Name'])
+chosen_ticker_symbol = available_tickers.loc[available_tickers['Symbol - Name'] == chosen_ticker_sn, 'Symbol'].item()
+chosen_ticker_symbol = "GOOGL"
+chosen_period_format = st.selectbox("Select period format",list(period_format.keys()))
+final_period_format = period_format.get(chosen_period_format)["Code"]
+final_period_value = st.slider("Choose Period", 0, period_format.get(chosen_period_format)["Max period"], 3)
+final_period = str(final_period_value) + final_period_format
+st.write("Final period is {}".format(final_period))
+# st.write("I'm ", age, 'years old')
+stock_data = yf.download(tickers = chosen_ticker_symbol, period = "17d", interval = "5m")
 stock_data.drop(stock_data.loc[stock_data['Volume'] == 0].index, inplace = True)
 # stock_data
 row_amount = stock_data.shape[0]
 st.write("You have chosen {} Tickers. Acquired {} data points".format(chosen_ticker_sn, row_amount))
 st.write("Acquired stock data from {} until {}".format(stock_data.index[0],stock_data.index[row_amount-1]))
-# print("Acquired stock data from {} until {}".format(stock_data.index[0],stock_data.index[row_amount-1]))
 st.dataframe(stock_data, height = 200, use_container_width = True)
+# print("Acquired stock data from {} until {}".format(stock_data.index[0],stock_data.index[row_amount-1]))
 
 
 # In[18]:
