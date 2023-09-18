@@ -15,7 +15,7 @@ import streamlit as st
 
 
 # Read and print the stock tickers that make up S&P500
-tickers_data = pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')[0]
+tickers_data = pd.read_html("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies")[0]
 tickers_symbol = tickers_data.Symbol.to_list()
 tickers_name = tickers_data.Security.to_list()
 tuples = [(idx,(sym, name)) for idx, (sym, name) in enumerate(zip(tickers_symbol, tickers_name))]
@@ -27,15 +27,15 @@ tickers = dict(tuples)
 
 
 period_format = {
-    "day": {
+    "Day": {
         "Code": "d",
         "Max Period": 30
     },
-    "month": {
+    "Month": {
         "Code": "m",
         "Max Period": 12
     },
-    "year": {
+    "Year": {
         "Code": "y",
         "Max Period": 10
     }
@@ -51,17 +51,20 @@ period_format = {
 
 
 available_tickers = pd.DataFrame(tickers).T
-available_tickers.columns = ['Symbol', 'Name']
-available_tickers['Symbol - Name'] = available_tickers['Symbol'] + ' - ' + available_tickers['Name']
+available_tickers.columns = ["Symbol", "Name"]
+available_tickers["Symbol - Name"] = available_tickers["Symbol"] + " - " + available_tickers["Name"]
 # print(tickers_list)
-chosen_ticker_sn = st.selectbox("Please select available ticker below!",available_tickers['Symbol - Name'])
-chosen_ticker_symbol = available_tickers.loc[available_tickers['Symbol - Name'] == chosen_ticker_sn, 'Symbol'].item()
+chosen_ticker_sn = st.selectbox("Please select available ticker below!",available_tickers["Symbol - Name"])
+chosen_ticker_symbol = available_tickers.loc[available_tickers["Symbol - Name"] == chosen_ticker_sn, "Symbol"].item()
 chosen_ticker_symbol = "GOOGL"
-chosen_period_format = st.selectbox("Select period format",list(period_format.keys()))
-final_period_format = period_format.get(chosen_period_format)["Code"]
-final_period_value = st.slider("Choose Period", 0, period_format.get(chosen_period_format)["Max Period"], 3)
-final_period = str(final_period_value) + final_period_format
-st.write("Final period is {}".format(final_period))
+col1, col2 = st.columns(2, gap = "small")
+with col1:
+    chosen_period_format = st.selectbox("Select period format",list(period_format.keys()))
+    final_period_format = period_format.get(chosen_period_format)["Code"]
+with col2:
+    final_period_value = st.slider("Choose Period", 1, period_format.get(chosen_period_format)["Max Period"], 3)
+    final_period = str(final_period_value) + final_period_format
+    st.write("Final period is {}".format(final_period))
 # st.write("I'm ", age, 'years old')
 stock_data = yf.download(tickers = chosen_ticker_symbol, period = "17d", interval = "5m")
 stock_data.drop(stock_data.loc[stock_data['Volume'] == 0].index, inplace = True)
