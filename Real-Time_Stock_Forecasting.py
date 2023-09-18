@@ -38,7 +38,7 @@ tickers_list['Symbol - Name'] = tickers_list['Symbol'] + ' - ' + tickers_list['N
 chosen_ticker_sn = st.selectbox("Please select available ticker below!",tickers_list['Symbol - Name'])
 chosen_ticker_symbol = tickers_list.loc[tickers_list['Symbol - Name'] == chosen_ticker_sn, 'Symbol'].item()
 # chosen_ticker_symbol = "GOOGL"
-stock_data = yf.download(tickers = chosen_ticker_symbol, period = "7d", interval = "5m")
+stock_data = yf.download(tickers = chosen_ticker_symbol, period = "60d", interval = "5m")
 stock_data.drop(stock_data.loc[stock_data['Volume'] == 0].index, inplace = True)
 # stock_data
 row_amount = stock_data.shape[0]
