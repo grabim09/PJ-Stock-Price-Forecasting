@@ -32,7 +32,7 @@ tickers_list['Symbol - Name'] = tickers_list['Symbol'] + ' - ' + tickers_list['N
 # print(tickers_list)
 
 
-# In[37]:
+# In[38]:
 
 
 chosen_ticker_sn = st.selectbox("Please select available ticker below!",tickers_list['Symbol - Name'])
@@ -41,7 +41,8 @@ chosen_ticker_symbol = tickers_list.loc[tickers_list['Symbol - Name'] == chosen_
 stock_data = yf.download(tickers = chosen_ticker_symbol, period = "7d", interval = "5m")
 stock_data.drop(stock_data.loc[stock_data['Volume'] == 0].index, inplace = True)
 # stock_data
-st.write("You have chosen {} Tickers. Acquired {} data points".format(choosen_ticker_sn, stock_data.shape[0]))
+st.write("You have chosen {} Tickers. Acquired {} data points".format(chosen_ticker_sn, stock_data.shape[0]))
+# print("You have chosen {} Tickers. Acquired {} data points".format(chosen_ticker_sn, stock_data.shape[0]))
 st.dataframe(stock_data, height = 200, use_container_width = True)
 
 
