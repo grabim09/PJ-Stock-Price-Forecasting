@@ -17,12 +17,13 @@ import streamlit as st
 def get_ticker():
     # Read and print the stock tickers that make up S&P500
     tickers_data = pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')[0]
+    return tickers_data
 
 
 # In[17]:
 
 
-def choose_ticker():
+def choose_ticker(tickers_data):
     tickers_symbol = tickers_data.Symbol.to_list()
     tickers_name = tickers_data.Security.to_list()
     tuples = [(idx,(sym, name)) for idx, (sym, name) in enumerate(zip(tickers_symbol, tickers_name))]
@@ -57,7 +58,7 @@ def main():
     st.title("Real-Time Stock Price Forecasting")
     st.divider()
     get_ticker()
-    choose_ticker()
+    choose_ticker(tickers_data)
     
 if __name__ == "__main__":
     main()
